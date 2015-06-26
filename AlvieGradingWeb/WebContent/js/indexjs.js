@@ -36,7 +36,7 @@ function fileCheck(frm){
 			if(!file1.localeCompare(file2))
 				return;
 		}
-		var check =eachFileCheck(document.getElementById("upfile"+i));
+		var check =eachFileCheck(document.getElementById("upfile"+i).value);
 		if(!check)
 			return;
 	}

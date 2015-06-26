@@ -1,6 +1,5 @@
 
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="grading.beans.GradingBean" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,10 +12,6 @@
 
 </head>
 <body>
-<% 
-	GradingBean gradingInfo = new GradingBean();
-
-%>
 My Alvie's Grading System
 
 <form action = "ExcelServlet" method="post" enctype="multipart/form-data">
