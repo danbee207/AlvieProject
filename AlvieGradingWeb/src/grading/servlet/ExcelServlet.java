@@ -1,10 +1,8 @@
 package grading.servlet;
 
-import java.io.File;
-import java.io.FileInputStream;
+import grading.modal.*;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +18,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
+
 
 
 /**
@@ -108,10 +106,10 @@ public class ExcelServlet extends HttpServlet {
 
 						String contentType = fileItem.getName();
 						if(contentType.endsWith("xlsx")){		//xlsx
-							InputStream fis = fileItem.getInputStream();
-							XSSFWorkbook workbook = new XSSFWorkbook(fis);
-						}else{									//xls
+							XSLXDataManager xlsxData = new XSLXDataManager(fileItem.getInputStream()) ;
 							
+						}else{									//xls
+							XSLDataManager xlsData = new XSLDataManager(fileItem.getInputStream());
 						}
 					}
 				}
