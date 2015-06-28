@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class GradingBean {
 
 	private float gradingTotal;
+	private ArrayList<String> gradingList;
 	private ArrayList<Float> gradingPercentage; 			// Each kinds percentage (i.e Quiz 3 : 5%) 
 	private ArrayList<Float> gradingStandard;				// A B C D F
 	
@@ -26,6 +27,12 @@ public class GradingBean {
 	}
 	public void setGradingPercentage(ArrayList<Float> gradingPercentage) {
 		this.gradingPercentage = gradingPercentage;
+	}
+	public ArrayList<String> getGradingList() {
+		return gradingList;
+	}
+	public void setGradingList(ArrayList<String> gradingList) {
+		this.gradingList = gradingList;
 	}
 	
 	

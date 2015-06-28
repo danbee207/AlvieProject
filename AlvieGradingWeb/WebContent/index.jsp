@@ -18,7 +18,7 @@ My Alvie's Grading System
 <input type = "button" id="moreAdd" value="+" onclick="addInputfile(this.form);"/>
 
 <div id="files">
-<input type = "file" id="upfile1" size="100"/>
+<input type = "file" id="upfile1" name="upfile1" size="100"/>
 </div>
 <input type = "button" value="Upload file" onclick="fileCheck(this.form)"/>
 <input type="hidden" value="1" name="fileNum" >

@@ -4,17 +4,24 @@ import java.util.ArrayList;
 
 public class Student {
 
-	private String name;
+	private String lastName, firstName;
 	private char grade;
 	private ArrayList<Float> scores;
 	private int total;
 	private float percentage;
 	
-	public String getName() {
-		return name;
+	
+	public String getLastName() {
+		return lastName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	public char getGrade() {
 		return grade;

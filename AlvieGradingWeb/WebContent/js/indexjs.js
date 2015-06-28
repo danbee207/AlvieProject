@@ -10,37 +10,42 @@ function eachFileCheck(upfile){
 	if(!upfile){
 		console.log("File blank");
 		alert("Choose Excel file");
-		return false;
+		return -1;
 	}
 	
 	if(fileExt.toUpperCase()=="XLS" || fileExt.toUpperCase()=="XLSX"){
 		
-		return true;
+		return 0;
 		
 	}else{
 		console.log("not excel format");
-		return false;
+		return 1;
 	}
 	
 }
 
 function fileCheck(frm){
 	
-	var num=frm.fileNum.value;
+	var num=parseInt(frm.fileNum.value);
 	var bsubmitCheck = true;
 	
 	for(var i=1;i<=num;i++){
+		var file1 = document.getElementById("upfile"+i).value;
 		if(i<num){
-			var file1 = document.getElementById("upfile"+i).value;
 			var file2 = document.getElementById("upfile"+(i+1)).value;
 			if(!file1.localeCompare(file2))
 				return;
 		}
-		var check =eachFileCheck(document.getElementById("upfile"+i).value);
-		if(!check)
+		
+		var check =eachFileCheck(file1);
+		if(check==1){
 			return;
+		}else if(check==-1){
+			frm.removeChild(upFile);
+		}
+		console.log("check : " + check + " file name : " + "upfile" + i);
 	}
-	
+	alert("!");
 	frm.submit();
 	
 	
@@ -49,10 +54,12 @@ function fileCheck(frm){
 
 function addInputfile(frm){
 
+	
 	var fileNum = parseInt(frm.fileNum.value);
 	var file = document.createElement("INPUT");
 	file.setAttribute("type", "file");
-	file.setAttribute("id", "upfile"+(fileNum+1));
+	file.setAttribute("name	", "upfile"+(fileNum+1));
+	file.setAttribute("id","upfile"+(fileNum+1));
 	file.setAttribute("size",100);
 	
 
