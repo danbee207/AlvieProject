@@ -1,10 +1,16 @@
 package grading.servlet;
 
+import grading.beans.GradingBean;
+import grading.beans.Student;
 import grading.modal.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -72,6 +78,7 @@ public class ExcelServlet extends HttpServlet {
 	private void filedown(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException
 	{
 		HttpSession session = request.getSession(true);
+		
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader("Pragma", "no-cache");
 		response.setDateHeader("Expires", 0);
@@ -93,23 +100,29 @@ public class ExcelServlet extends HttpServlet {
 			List<FileItem> items = upload.parseRequest(request);
 			Iterator iter = items.iterator();
 			
+			GradingBean grading = new GradingBean();
+			ObservableList<Student> students = FXCollections.observableArrayList();
+			
 			while(iter.hasNext()){
 			
 				FileItem fileItem = (FileItem)iter.next();
 				
 				if(fileItem.isFormField()){
-					System.out.println("here 4");
+					System.out.println("here 4- EOF");
+					
 					
 				}else{
 					System.out.println("here 5");
 					if(fileItem.getSize()>0){
-
+						
+						
 						String contentType = fileItem.getName();
 						if(contentType.endsWith("xlsx")){		//xlsx
-							XSLXDataManager xlsxData = new XSLXDataManager(fileItem.getInputStream()) ;
-							
-						}else{									//xls
-							XSLDataManager xlsData = new XSLDataManager(fileItem.getInputStream());
+							NewExcelDataManager xlsxData = new NewExcelDataManager(fileItem.getInputStream(),grading) ;
+							students = xlsxData.getDataFromSheet();
+						}else if(contentType.endsWith("xls")){									//xls
+							OldExcelDataManager xlsData = new OldExcelDataManager(fileItem.getInputStream(),grading);
+							students = xlsData.getDataFromSheet();
 						}
 					}
 				}
@@ -117,8 +130,28 @@ public class ExcelServlet extends HttpServlet {
 				
 				
 			}
+			
+			if(students.size()==0){						//file error
+				System.out.println("no file reading");
+				session.setAttribute("isBack", true);
+				gotemp(response,"index.jsp");
+			}else{										//success
+				
+				System.out.println("file existed, n is successful");
+				session.setAttribute("isBack",false);
+				session.setAttribute("student", students);
+				session.setAttribute("gradingStandard", grading);
+				gotemp(response,"mainShowing.jsp");
+			}
 		}
 	}
 	
+	private void gotemp(HttpServletResponse response,String goSite) throws IOException{
+		response.setContentType("text/html;charset=euc-kr");
+		PrintWriter out = response.getWriter();
+		out.println("<script type = 'text/javascript'>");
+		out.println("location.href='" + goSite + "';");
+		out.println("</script>");
+	}
 
 }

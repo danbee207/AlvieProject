@@ -3,8 +3,8 @@ package grading.beans;
 public class ScoreBean {
 
 	private String scoreName;
-	private float score;
-	
+	private double score;
+	private float percentage;
 	
 	public String getScoreName() {
 		return scoreName;
@@ -12,11 +12,17 @@ public class ScoreBean {
 	public void setScoreName(String scoreName) {
 		this.scoreName = scoreName;
 	}
-	public float getScore() {
+	public double getScore() {
 		return score;
 	}
-	public void setScore(float score) {
+	public void setScore(double score) {
 		this.score = score;
+	}
+	public float getPercentage() {
+		return percentage;
+	}
+	public void setPercentage(float percentage) {
+		this.percentage = percentage;
 	}
 	
 	

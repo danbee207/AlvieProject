@@ -2,11 +2,14 @@ package grading.beans;
 
 import java.util.ArrayList;
 
+import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableList;
+
 public class Student {
 
 	private String lastName, firstName;
-	private char grade;
-	private ArrayList<Float> scores;
+	private StringProperty grade;
+	private ObservableList<ScoreBean> scores;
 	private int total;
 	private float percentage;
 	
@@ -23,16 +26,22 @@ public class Student {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public char getGrade() {
+	
+	public String getGrade(){
+		return grade.get();
+	}
+	
+	
+	public StringProperty gradeProperty() {
 		return grade;
 	}
-	public void setGrade(char grade) {
-		this.grade = grade;
+	public void setGrade(String initgrade) {
+		grade.set(initgrade);
 	}
-	public ArrayList<Float> getScores() {
+	public ObservableList<ScoreBean> getScores() {
 		return scores;
 	}
-	public void setScores(ArrayList<Float> scores) {
+	public void setScores(ObservableList<ScoreBean> scores) {
 		this.scores = scores;
 	}
 	public int getTotal() {
