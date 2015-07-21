@@ -91,7 +91,7 @@ function addInputfile(frm){
 	var fileNum = parseInt(frm.fileNum.value);
 	var file = document.createElement("INPUT");
 	file.setAttribute("type", "file");
-	file.setAttribute("name	", "upfile"+(fileNum+1));
+	file.setAttribute("name", "upfile"+(fileNum+1));
 	file.setAttribute("id","upfile"+(fileNum+1));
 	file.setAttribute("size",100);
 	

@@ -1,9 +1,7 @@
 
 <%@ page import="java.lang.Boolean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<jsp:useBean id="isBack" type="java.lang.Boolean" scope="session" />
+	pageEncoding="UTF-8" session = "true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,17 +12,24 @@
 <link href="./css/index.css" rel="stylesheet">
 </head>
 <%
-	if (isBack == null) {
-		isBack = false;
-		%>
+	Object isBlack = session.getAttribute("isBlack");
+	
+
+	if (isBlack == null) {
+		isBlack = false;
+	
+	
+%>
 <body>
-	<% 
-	} else if (isBack == true) {  isBack=false; %>
+<%} 
+		 else if (isBlack.equals(true)) {
+			isBlack = false;
+	%>
 
 <body onload="layer_open('layer2');return false;">
-	<% 
-	}
-%>
+	<%
+		}
+	%>
 
 	My Alvie's Grading System
 
@@ -40,9 +45,7 @@
 			name="fileNum">
 
 	</form>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-1.11.3.js"></script>
-	<script type="text/javascript" src="./js/indexjs.js"></script>
+
 	<div class="layer">
 		<div class="bg"></div>
 		<div id="layer2" class="pop-layer">
@@ -57,7 +60,9 @@
 
 		</div>
 	</div>
-
+	<script type="text/javascript"
+		src="http://code.jquery.com/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="./js/indexjs.js"></script>
 
 </body>
 </html>
